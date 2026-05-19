@@ -6,7 +6,19 @@ export const metadata = {
   title: "Chevrolet Camaro | DREAMS RENT",
 };
 
-export default function CarDetailsPage() {
+const fetchSingleCars = async (id) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/cars/${id}`);
+  const data = await res.json();
+  return data || {};
+};
+
+export default async function CarDetailsPage({params}) {
+
+  const {id} = await params;
+  const cars = await fetchSingleCars(id)
+
+  // console.log(cars)
+
   return (
     <main className="bg-background min-h-screen text-on-surface selection:bg-primary-container selection:text-on-primary-container">
       <Navbar />
@@ -42,7 +54,7 @@ export default function CarDetailsPage() {
                     <span className="text-on-surface-variant text-label-md ml-1">(5.0)</span>
                   </div>
                 </div>
-                <h1 className="text-display-lg font-display-lg text-on-surface mb-2">Chevrolet Camaro</h1>
+                <h1 className="text-display-lg font-display-lg text-on-surface mb-2">{cars.brand} - {cars.model}</h1>
                 <div className="flex flex-wrap gap-4 mt-4 text-on-surface-variant text-label-md">
                   <span className="flex items-center gap-1"><span className="material-symbols-outlined text-[18px]">location_on</span> Miami St, Destin, FL 32550, USA</span>
                   <span className="flex items-center gap-1"><span className="material-symbols-outlined text-[18px]">visibility</span> Views : 250</span>
@@ -72,7 +84,7 @@ export default function CarDetailsPage() {
             <FadeUp delay={0.2} yOffset={40}>
               <div className="space-y-4">
                 <div className="relative rounded-2xl overflow-hidden group border border-surface-container-highest shadow-2xl">
-                  <img alt="Chevrolet Camaro Hero" className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG024WbNYbMlBN1OV27Zj0l9Nul7MkvM7vux6sDg82E3Sn7RCbg85iagznOJgfVyKnVt14cMvq026z3Lk51lcXJlVjhSZceWK2z5iCo_fzAasEn9r-ovX3Oznsd8YGF3mBNSTZl1DscOF1qOyz1qa6qFT1NoCqhaC1gCnr44SY9jCkemmfDdihfb8S6XqdrwW91P3WEsL-WeMInrZb-xIdbie8TcNxJQYP2c283SzE_5nRU1qExECqy5cAS0P-xtWQBrepRva2AIs" />
+                  <img alt="Chevrolet Camaro Hero" className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-700" src={cars.img} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   
                   <div className="absolute inset-0 flex items-center justify-between px-6 opacity-0 group-hover:opacity-100 transition-opacity">
