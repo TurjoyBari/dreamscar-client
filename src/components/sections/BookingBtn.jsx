@@ -2,6 +2,7 @@
 
 
 import { authClient, useSession } from '@/lib/auth-client';
+import { image } from 'framer-motion/client';
 import { useRouter } from 'next/navigation';
 
 import { toast } from 'react-toastify';
@@ -25,7 +26,7 @@ const BookingBtn = ({cars}) => {
             clientName: session?.user?.name,
             clientEmail: session?.user?.email,
             carBrand: cars?.brand,
-            carModel: cars?.model,
+            image: cars?.img
         }
 
 

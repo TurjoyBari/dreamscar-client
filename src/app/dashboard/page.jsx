@@ -4,6 +4,7 @@ import FadeUp from "@/components/animations/FadeUp";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import CancelBokingBtn from "@/components/sections/CancelBokingBtn";
 
 export const metadata = {
   title: "User Bookings | DREAMS RENT",
@@ -15,7 +16,23 @@ export default async function DashboardPage() {
         headers: await headers()
     })
 
+    const session = await auth.api.getSession({
+        headers: await headers()
+    })
+    // console.log(session);
 
+    if (!session?.user || !token) {
+        redirect("/login")
+    }
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/booking/${session?.user?.id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        cache: "no-store"
+    })
+    const booking = await res.json() || [];
+ 
 
 
   return (
@@ -167,20 +184,23 @@ export default async function DashboardPage() {
                     <th className="px-6 py-5 whitespace-nowrap">Pickup / Delivery Location <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
                     <th className="px-6 py-5 whitespace-nowrap">Dropoff Location <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
                     <th className="px-6 py-5 whitespace-nowrap">Booked On <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
+                    <th className="px-6 py-5 whitespace-nowrap">Cancel Booking <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-surface-container-highest">
+                {booking?.map((booking) => (
+                <tbody key={booking?._id} className="divide-y divide-surface-container-highest">
                   {/* Row 1 */}
                   <tr className="hover:bg-surface-container-high/20 transition-colors group">
+                    
                     <td className="px-6 py-6"><input className="rounded bg-surface-container-high border-outline text-primary focus:ring-primary" type="checkbox" /></td>
-                    <td className="px-6 py-6 font-bold text-primary group-hover:text-primary-container transition-colors">#1001</td>
+                    <td className="px-6 py-6 font-bold text-primary group-hover:text-primary-container transition-colors">#0808</td>
                     <td className="px-6 py-6">
                       <div className="flex items-center gap-4">
                         <div className="w-16 h-10 rounded-lg overflow-hidden bg-surface-container-highest relative shrink-0">
-                          <img alt="Ferrari 458 MM Speciale" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH6hB0rdE2J7akx2nDVc7FWXcDjiTNg_oYWqOgWuWtNf0pNlRRqO5MG-VjFX__ZHtvliduQq7rSgXW9Pj7pjgf7ausSbaG4ZaevIMStOadiuCUJYBZeiIRo-xYWP1Q3kvA7VL8Ax4sfVRQNCx4vyrhF6OvjuFMZKm9-7dYabMPiNh8y-Yju3-gdaHO8aS_fEvqgQMZCQsV0u04K8mZznwS7lq1eypmxSk6x4nQcCxkJpCst7oKR2GPYNlUIwe3MqjvToLD9xKY2_A" />
+                          <img alt="Ferrari 458 MM Speciale" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={booking?.image} />
                         </div>
                         <div>
-                          <div className="font-bold text-on-surface group-hover:text-primary transition-colors">Ferrari 458 MM Speciale</div>
+                          <div className="font-bold text-on-surface group-hover:text-primary transition-colors">{booking?.brand}</div>
                           <div className="text-xs text-on-surface-variant">Delivery</div>
                         </div>
                       </div>
@@ -188,17 +208,20 @@ export default async function DashboardPage() {
                     <td className="px-6 py-6 text-on-surface-variant">Hourly</td>
                     <td className="px-6 py-6">
                       <div className="text-sm">45, Avenue ,Mark Street, USA</div>
-                      <div className="text-xs text-primary">15 Sep 2023, 09:30 AM</div>
+                      <div className="text-xs text-primary">{new Date(booking?.bookingAt).toDateString()}</div>
                     </td>
                     <td className="px-6 py-6">
                       <div className="text-sm">21, Avenue, Windham, USA</div>
-                      <div className="text-xs text-on-surface-variant">15 Sep 2023, 11:30 AM</div>
+                      <div className="text-xs text-on-surface-variant">{new Date(booking?.bookingAt).toDateString()}</div>
                     </td>
-                    <td className="px-6 py-6 text-sm text-on-surface-variant">15 Sep 2023, 09:00 AM</td>
+                    <td className="px-6 py-6 text-sm text-on-surface-variant">{new Date(booking?.bookingAt).toDateString()}</td>
+                    <td className="px-6 py-6 text-sm text-on-surface-variant"><CancelBokingBtn/></td>
                   </tr>
                   
+                </tbody>
+                ))}
                   {/* Row 2 */}
-                  <tr className="hover:bg-surface-container-high/20 transition-colors group">
+                  {/* <tr className="hover:bg-surface-container-high/20 transition-colors group">
                     <td className="px-6 py-6"><input className="rounded bg-surface-container-high border-outline text-primary focus:ring-primary" type="checkbox" /></td>
                     <td className="px-6 py-6 font-bold text-primary group-hover:text-primary-container transition-colors">#1002</td>
                     <td className="px-6 py-6">
@@ -222,10 +245,10 @@ export default async function DashboardPage() {
                       <div className="text-xs text-on-surface-variant">15 Sep 2023, 11:30 AM</div>
                     </td>
                     <td className="px-6 py-6 text-sm text-on-surface-variant">18 Sep 2023, 08:10 PM</td>
-                  </tr>
+                  </tr> */}
 
                   {/* Row 3 */}
-                  <tr className="hover:bg-surface-container-high/20 transition-colors group">
+                  {/* <tr className="hover:bg-surface-container-high/20 transition-colors group">
                     <td className="px-6 py-6"><input className="rounded bg-surface-container-high border-outline text-primary focus:ring-primary" type="checkbox" /></td>
                     <td className="px-6 py-6 font-bold text-primary group-hover:text-primary-container transition-colors">#1003</td>
                     <td className="px-6 py-6">
@@ -249,10 +272,10 @@ export default async function DashboardPage() {
                       <div className="text-xs text-on-surface-variant">10 Oct 2023, 10:15 AM</div>
                     </td>
                     <td className="px-6 py-6 text-sm text-on-surface-variant">21 Sep 2023, 04:15 PM</td>
-                  </tr>
+                  </tr> */}
 
                   {/* Row 4 */}
-                  <tr className="hover:bg-surface-container-high/20 transition-colors group">
+                  {/* <tr className="hover:bg-surface-container-high/20 transition-colors group">
                     <td className="px-6 py-6"><input className="rounded bg-surface-container-high border-outline text-primary focus:ring-primary" type="checkbox" /></td>
                     <td className="px-6 py-6 font-bold text-primary group-hover:text-primary-container transition-colors">#1004</td>
                     <td className="px-6 py-6">
@@ -274,10 +297,10 @@ export default async function DashboardPage() {
                     <td className="px-6 py-6">
                       <div className="text-sm">14 Roane Avenue, Herndon</div>
                       <div className="text-xs text-on-surface-variant">05 Dec 2023, 02:30 PM</div>
-                    </td>
-                    <td className="px-6 py-6 text-sm text-on-surface-variant">04 Oct 2023, 08:00 AM</td>
-                  </tr>
-                </tbody>
+                      </td>
+                      <td className="px-6 py-6 text-sm text-on-surface-variant">04 Oct 2023, 08:00 AM</td>
+                      </tr> */}
+                      
               </table>
             </div>
             <div className="p-6 border-t border-surface-container-highest flex flex-col sm:flex-row items-center justify-between gap-4 bg-surface-container-low">
