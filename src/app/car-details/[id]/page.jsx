@@ -29,13 +29,13 @@ export default async function CarDetailsPage({params}) {
 
   const cars = await fetchSingleCars(id, token)
 
-  // console.log(cars)
+
 
   return (
     <main className="bg-background min-h-screen text-on-surface selection:bg-primary-container selection:text-on-primary-container">
       <Navbar />
 
-      {/* Page Header / Breadcrumbs */}
+  
       <section className="bg-surface-container-low pt-32 pb-24 relative overflow-hidden">
         {/* Subtle background glow */}
         <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/5 blur-3xl pointer-events-none rounded-full"></div>
