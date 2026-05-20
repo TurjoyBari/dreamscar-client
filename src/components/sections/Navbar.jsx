@@ -1,13 +1,18 @@
 "use client";
+import { signOut, useSession } from "@/lib/auth-client";
 
+import { BookOpen, Menu, X, User, LogOut, LayoutDashboard } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Magnetic from "@/components/animations/Magnetic";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
+  const { data: session, isPending } = useSession()
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 50) {
@@ -16,6 +21,12 @@ export default function Navbar() {
       setScrolled(false);
     }
   });
+
+  const handleLogOut = async () => {
+    await signOut();
+    router.push("/")
+
+  }
 
   return (
     <motion.header
@@ -68,16 +79,90 @@ export default function Navbar() {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
           </Link>
         </div>
+
+
+
+
+
+
+        <div className="hidden md:flex items-center gap-4">
+
+            {
+              !isPending && !session ?  
         <div className="flex items-center space-x-4">
-          <button className="hidden md:block text-on-surface font-label-md text-label-md hover:text-primary px-4 py-2 transition-colors">
+          <Link href= "/signin" className="hidden md:block text-on-surface font-label-md text-label-md hover:text-primary px-4 py-2 transition-colors">
             Sign In
-          </button>
+          </Link>
           <Magnetic strength={0.3}>
             <Link href="/signup" className="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg font-bold text-label-md hover:scale-95 transition-transform shadow-[0_0_15px_rgba(255,152,0,0.2)] hover:shadow-[0_0_25px_rgba(255,152,0,0.5)] block">
               Sign Up
             </Link>
           </Magnetic>
         </div>
+              
+              :
+                <div className="relative group">
+  <button className="flex items-center gap-3 p-1 rounded-full hover:bg-white/5 transition-colors border border-transparent hover:border-white/10">
+    <Image
+      width={40}
+      height={40}
+      src={
+        session?.user?.image ||
+        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=400"
+      }
+      alt="avatar"
+      className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/20"
+    />
+
+    <div className="text-left hidden lg:block">
+      <p className="text-sm font-bold truncate max-w-25 text-white">
+        {session?.user?.name}
+      </p>
+      <p className="text-[10px] text-gray-400">Client</p>
+    </div>
+  </button>
+
+  {/* DROPDOWN */}
+  <div className="absolute right-0 top-12 w-56 bg-[#1c1b1b] border border-white/10 rounded-2xl shadow-2xl hidden group-hover:flex flex-col py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+
+    <div className="px-4 py-3 border-b border-white/10">
+      <p className="font-bold text-sm text-white">Welcome back!</p>
+      <p className="text-xs truncate text-gray-400">
+        {session?.user?.email}
+      </p>
+    </div>
+
+    <Link
+      href="/dashboard"
+      className="px-4 py-2 text-sm text-gray-200 hover:bg-white/5 flex items-center gap-3 transition-colors"
+    >
+      <LayoutDashboard className="w-4 h-4" />
+      Dashboard
+    </Link>
+
+    <Link
+      href="/settings"
+      className="px-4 py-2 text-sm text-gray-200 hover:bg-white/5 flex items-center gap-3 transition-colors"
+    >
+      <User className="w-4 h-4" />
+      Settings
+    </Link>
+
+    <button
+      onClick={handleLogOut}
+      className="px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 flex items-center gap-3 transition-colors text-left"
+    >
+      <LogOut className="w-4 h-4" />
+      Log Out
+    </button>
+  </div>
+</div>
+            }
+
+
+
+          </div>
+
       </nav>
     </motion.header>
   );

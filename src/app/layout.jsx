@@ -1,4 +1,4 @@
-
+import { ToastContainer } from "react-toastify";
 import { Inter, Montserrat } from "next/font/google";
 import SmoothScroll from "@/components/animations/SmoothScroll";
 import "./globals.css";
@@ -24,6 +24,12 @@ export default function RootLayout({ children }) {
         <SmoothScroll>
           {children}
         </SmoothScroll>
+
+         <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          theme="dark"
+        />
       </body>
     </html>
   );
