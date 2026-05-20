@@ -40,7 +40,7 @@ export default async function CarDetailsPage({params}) {
 
   
       <section className="bg-surface-container-low pt-32 pb-24 relative overflow-hidden">
-        {/* Subtle background glow */}
+       
         <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/5 blur-3xl pointer-events-none rounded-full"></div>
         
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10">

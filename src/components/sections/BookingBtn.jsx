@@ -11,7 +11,7 @@ const BookingBtn = ({cars}) => {
 
     const { data: session } = useSession()
     const router = useRouter();
-    // console.log(session);
+    
 
     const handleBooking = async () => {
         const { data: jwtData } = await authClient.token();
