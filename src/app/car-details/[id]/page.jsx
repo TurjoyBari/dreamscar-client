@@ -6,8 +6,14 @@ export const metadata = {
   title: "Chevrolet Camaro | DREAMS RENT",
 };
 
-const fetchSingleCars = async (id) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/cars/${id}`);
+const fetchSingleCars = async (id, token) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/cars/${id}`,
+    {
+        headers: {
+            authorization: `Bearer ${token}` || ""
+        }
+    }
+  );
   const data = await res.json();
   return data || {};
 };
@@ -15,7 +21,13 @@ const fetchSingleCars = async (id) => {
 export default async function CarDetailsPage({params}) {
 
   const {id} = await params;
-  const cars = await fetchSingleCars(id)
+
+  const { token } = await auth.api.getToken({
+        headers: await headers(),
+    });
+
+
+  const cars = await fetchSingleCars(id, token)
 
   // console.log(cars)
 
