@@ -1,6 +1,9 @@
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import FadeUp from "@/components/animations/FadeUp";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import BookingBtn from "@/components/sections/BookingBtn";
 
 export const metadata = {
   title: "Chevrolet Camaro | DREAMS RENT",
@@ -28,7 +31,7 @@ export default async function CarDetailsPage({params}) {
 
 
   const cars = await fetchSingleCars(id, token)
-
+  const {bookingCount} = cars
 
 
   return (
@@ -75,7 +78,7 @@ export default async function CarDetailsPage({params}) {
               </div>
               <div className="flex gap-2 mt-6 md:mt-0">
                 <button className="bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-surface-variant transition-colors">
-                  <span className="material-symbols-outlined text-[20px]">analytics</span> Total Booking : 300
+                  <span className="material-symbols-outlined text-[20px]">analytics</span> Total Booking : {`${bookingCount || 200}`}
                 </button>
                 <button className="border border-outline-variant text-on-surface px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-surface-container-high transition-colors hover:border-primary-container hover:text-primary">
                   <span className="material-symbols-outlined text-[20px]">compare_arrows</span> Compare Listing
@@ -351,7 +354,7 @@ export default async function CarDetailsPage({params}) {
                   </div>
                   
                   <div className="space-y-3">
-                    <button className="w-full py-4 bg-primary-container text-on-primary-container rounded-xl font-black text-body-lg hover:scale-95 transition-transform shadow-[0_0_20px_rgba(255,152,0,0.3)] hover:shadow-[0_0_30px_rgba(255,152,0,0.5)]">Book Now</button>
+                    <BookingBtn cars = {cars}/>
                     <button className="w-full py-4 border-2 border-outline-variant text-on-surface rounded-xl font-bold hover:bg-surface-container hover:border-surface-variant transition-colors">Enquire Us</button>
                   </div>
                 </div>

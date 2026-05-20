@@ -2,12 +2,22 @@ import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import FadeUp from "@/components/animations/FadeUp";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 export const metadata = {
   title: "User Bookings | DREAMS RENT",
 };
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+
+  const { token } = await auth.api.getToken({
+        headers: await headers()
+    })
+
+
+
+
   return (
     <main className="bg-background min-h-screen text-on-surface selection:bg-primary-container selection:text-on-primary-container">
       <Navbar />
