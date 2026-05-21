@@ -188,7 +188,7 @@ export default async function DashboardPage() {
                     <th className="px-6 py-5 whitespace-nowrap">Cancel Booking <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
                   </tr>
                 </thead>
-                {booking?.map((booking) => (
+                {Array.isArray(booking) && booking?.map((booking) => (
                 <tbody key={booking?._id} className="divide-y divide-surface-container-highest">
                   {/* Row 1 */}
                   <tr className="hover:bg-surface-container-high/20 transition-colors group">
