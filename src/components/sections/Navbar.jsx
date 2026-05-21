@@ -74,6 +74,10 @@ export default function Navbar() {
             Blog
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
           </Link>
+          <Link href="/add-car" className="font-label-md text-label-md relative group transition-colors duration-200 text-on-surface hover:text-primary">
+            Add Car
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+          </Link>
           <Link href="/dashboard" className="font-label-md text-label-md relative group transition-colors duration-200 text-on-surface hover:text-primary">
             Dashboard
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>

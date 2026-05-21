@@ -5,6 +5,7 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import CancelBokingBtn from "@/components/sections/CancelBokingBtn";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "User Bookings | DREAMS RENT",
@@ -215,91 +216,11 @@ export default async function DashboardPage() {
                       <div className="text-xs text-on-surface-variant">{new Date(booking?.bookingAt).toDateString()}</div>
                     </td>
                     <td className="px-6 py-6 text-sm text-on-surface-variant">{new Date(booking?.bookingAt).toDateString()}</td>
-                    <td className="px-6 py-6 text-sm text-on-surface-variant"><CancelBokingBtn/></td>
+                    <td className="px-6 py-6 text-sm text-on-surface-variant"><CancelBokingBtn bookingId={booking?._id} token={token} /></td>
                   </tr>
                   
                 </tbody>
                 ))}
-                  {/* Row 2 */}
-                  {/* <tr className="hover:bg-surface-container-high/20 transition-colors group">
-                    <td className="px-6 py-6"><input className="rounded bg-surface-container-high border-outline text-primary focus:ring-primary" type="checkbox" /></td>
-                    <td className="px-6 py-6 font-bold text-primary group-hover:text-primary-container transition-colors">#1002</td>
-                    <td className="px-6 py-6">
-                      <div className="flex items-center gap-4">
-                        <div className="w-16 h-10 rounded-lg overflow-hidden bg-surface-container-highest relative shrink-0">
-                          <img alt="Toyota Camry SE 350" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF9mql96NDMp_olG86F7YLddW1e6akn98dID3Tb1tZ3XDTCKzezC30SUkZC8qqYmGsJxsC6yOVdLL5tDTYuJQ_pl3WQFXtRytnrEVVNjcYlibp0WWoqrUHHL4g43n6z9DKH7iMsNB0pct4OhrAiquW3bEfsbVCZjrJuVvJd3ejC-PCaKApZAx3gtybMmZWar4SpQQNzIWS4aajBj_TjbmgucwIb-aG5XGEEjteqZfphLQ6CFSYniAB9GVHP5w76WuuJrQrfNvv1ZM" />
-                        </div>
-                        <div>
-                          <div className="font-bold text-on-surface group-hover:text-primary transition-colors">Toyota Camry SE 350</div>
-                          <div className="text-xs text-on-surface-variant">Self Pickup</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-6 text-on-surface-variant">Day</td>
-                    <td className="px-6 py-6">
-                      <div className="text-sm">1646 West St, Grand Rapids</div>
-                      <div className="text-xs text-primary">18 Sep 2023, 09:00 AM</div>
-                    </td>
-                    <td className="px-6 py-6">
-                      <div className="text-sm">26 Platinum Drive, Canonsburg</div>
-                      <div className="text-xs text-on-surface-variant">15 Sep 2023, 11:30 AM</div>
-                    </td>
-                    <td className="px-6 py-6 text-sm text-on-surface-variant">18 Sep 2023, 08:10 PM</td>
-                  </tr> */}
-
-                  {/* Row 3 */}
-                  {/* <tr className="hover:bg-surface-container-high/20 transition-colors group">
-                    <td className="px-6 py-6"><input className="rounded bg-surface-container-high border-outline text-primary focus:ring-primary" type="checkbox" /></td>
-                    <td className="px-6 py-6 font-bold text-primary group-hover:text-primary-container transition-colors">#1003</td>
-                    <td className="px-6 py-6">
-                      <div className="flex items-center gap-4">
-                        <div className="w-16 h-10 rounded-lg overflow-hidden bg-surface-container-highest relative shrink-0">
-                          <img alt="Kia Soul 2016" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTyMP1dPsaZupJc90Vr7vmgYr_a0gCa05CvQtkoKTcYIsyGY3T1AVSuCheST4xpZrmInuJlVm9w3cPYDkOydY7zA4dctYJao8ScwGUnTgz67v3K2USrEfVzVq5XqOFAyKJQ5JKRhpFrL12LUjzlSc7cVjGo69E2WRfkYymuzBYESrvG61X_LMnVh7bT-O-14sq9J8hDb0xA4sODJpzI4e03aoz236y3fsn-J1Yx6OZLdhENL1UgvHhxIRcqsk8bC9m4gQpal-vCSQ" />
-                        </div>
-                        <div>
-                          <div className="font-bold text-on-surface group-hover:text-primary transition-colors">Kia Soul 2016</div>
-                          <div className="text-xs text-on-surface-variant">Delivery</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-6 text-on-surface-variant">Weekly</td>
-                    <td className="px-6 py-6">
-                      <div className="text-sm">14 Straford Park, Pittsburg</div>
-                      <div className="text-xs text-primary">03 Oct 2023, 10:15 AM</div>
-                    </td>
-                    <td className="px-6 py-6">
-                      <div className="text-sm">11 Pleasant Hill, Pittsburg</div>
-                      <div className="text-xs text-on-surface-variant">10 Oct 2023, 10:15 AM</div>
-                    </td>
-                    <td className="px-6 py-6 text-sm text-on-surface-variant">21 Sep 2023, 04:15 PM</td>
-                  </tr> */}
-
-                  {/* Row 4 */}
-                  {/* <tr className="hover:bg-surface-container-high/20 transition-colors group">
-                    <td className="px-6 py-6"><input className="rounded bg-surface-container-high border-outline text-primary focus:ring-primary" type="checkbox" /></td>
-                    <td className="px-6 py-6 font-bold text-primary group-hover:text-primary-container transition-colors">#1004</td>
-                    <td className="px-6 py-6">
-                      <div className="flex items-center gap-4">
-                        <div className="w-16 h-10 rounded-lg overflow-hidden bg-surface-container-highest relative shrink-0">
-                          <img alt="Audi A3 2019" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGgcKkAILkmrEsGpYQ3fVWlBQZ7Onf0XrQRiiZzIqmKnwUj3qwd0v3TRgXxg8Mq43FO1X3kMX2-qg6bgtSD07zx3DbhNxCn9naWXAED2rR0FNK0GeANcIslPEiF6rajgVQfgOtbLeGldR7AWZTCX5dCx2XU2oRC14qanOwRJBC_VUmn2h8WzgrfYIKJLrpMA1AMSvEgX1i5XlNsgXP77WS6DMirE6ZxsNwF0HqB40C7t7agXUYAV1LjnHU5c_DFXZX_Idkp7-_Yf0" />
-                        </div>
-                        <div>
-                          <div className="font-bold text-on-surface group-hover:text-primary transition-colors">Audi A3 2019 new</div>
-                          <div className="text-xs text-on-surface-variant">Self Pickup</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-6 text-on-surface-variant">Monthly</td>
-                    <td className="px-6 py-6">
-                      <div className="text-sm">63 White Pine Lane, Martinsville</div>
-                      <div className="text-xs text-primary">05 Nov 2023, 02:30 PM</div>
-                    </td>
-                    <td className="px-6 py-6">
-                      <div className="text-sm">14 Roane Avenue, Herndon</div>
-                      <div className="text-xs text-on-surface-variant">05 Dec 2023, 02:30 PM</div>
-                      </td>
-                      <td className="px-6 py-6 text-sm text-on-surface-variant">04 Oct 2023, 08:00 AM</td>
-                      </tr> */}
                       
               </table>
             </div>
