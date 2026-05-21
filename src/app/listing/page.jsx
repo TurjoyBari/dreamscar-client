@@ -49,7 +49,7 @@ export default async function DashboardPage() {
         </div>
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10 text-center">
           <FadeUp>
-            <h1 className="text-headline-lg font-headline-lg mb-4 text-on-surface uppercase tracking-tight">User Bookings</h1>
+            <h1 className="text-headline-lg font-headline-lg mb-4 text-on-surface uppercase tracking-tight">User Listing</h1>
             <nav className="flex justify-center items-center gap-2 text-on-surface-variant text-label-md font-label-md">
               <Link className="hover:text-primary transition-colors" href="/">Home</Link>
               <span className="material-symbols-outlined text-sm">chevron_right</span>
@@ -131,7 +131,7 @@ export default async function DashboardPage() {
               </div>
               <button className="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 hover:bg-[#e68900] transition-all active:scale-95 text-label-md font-label-md">
                 <span className="material-symbols-outlined">add</span>
-                Add Booking
+                Add Listing
               </button>
             </div>
           </div>
@@ -139,7 +139,7 @@ export default async function DashboardPage() {
           {/* Filter Bar */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
             <div className="flex flex-wrap gap-2">
-              <button className="px-6 py-2.5 rounded-full bg-primary-container text-on-primary-container font-bold text-label-md font-label-md hover:bg-[#e68900] transition-colors">All Bookings</button>
+              <button className="px-6 py-2.5 rounded-full bg-primary-container text-on-primary-container font-bold text-label-md font-label-md hover:bg-[#e68900] transition-colors">All Listing</button>
               <button className="px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant hover:text-primary font-bold text-label-md font-label-md transition-colors">Upcoming</button>
               <button className="px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant hover:text-primary font-bold text-label-md font-label-md transition-colors">Inprogress</button>
               <button className="px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant hover:text-primary font-bold text-label-md font-label-md transition-colors">Completed</button>
@@ -170,7 +170,7 @@ export default async function DashboardPage() {
           <div className="bg-surface-container-low rounded-2xl border border-surface-container-highest overflow-hidden shadow-2xl">
             <div className="p-6 border-b border-surface-container-highest flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <h3 className="text-headline-md font-headline-md">All Bookings</h3>
+                <h3 className="text-headline-md font-headline-md">All Listing</h3>
                 <span className="bg-primary/20 text-primary px-3 py-1 rounded-full text-xs font-bold">40</span>
               </div>
             </div>
@@ -179,13 +179,13 @@ export default async function DashboardPage() {
                 <thead className="bg-surface-container-high/50 text-label-md font-label-md text-on-surface uppercase tracking-wider">
                   <tr>
                     <th className="px-6 py-5 w-12"><input className="rounded bg-surface-container-high border-outline text-primary focus:ring-primary" type="checkbox" /></th>
-                    <th className="px-6 py-5 whitespace-nowrap">Booking ID <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
+                    <th className="px-6 py-5 whitespace-nowrap">Listing ID <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
                     <th className="px-6 py-5 whitespace-nowrap">Car Name <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
                     <th className="px-6 py-5 whitespace-nowrap">Rental Type <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
                     <th className="px-6 py-5 whitespace-nowrap">Pickup / Delivery Location <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
                     <th className="px-6 py-5 whitespace-nowrap">Dropoff Location <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
                     <th className="px-6 py-5 whitespace-nowrap">Booked On <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
-                    <th className="px-6 py-5 whitespace-nowrap">Cancel Booking <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
+                    <th className="px-6 py-5 whitespace-nowrap">Cancel Listing <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
                   </tr>
                 </thead>
                 {booking?.map((booking) => (
