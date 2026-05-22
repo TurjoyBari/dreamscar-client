@@ -131,7 +131,7 @@ export default async function DashboardPage() {
               </div>
               <button className="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 hover:bg-[#e68900] transition-all active:scale-95 text-label-md font-label-md">
                 <span className="material-symbols-outlined">add</span>
-                Add Booking
+                <Link href="/cars">Add Booking</Link>
               </button>
             </div>
           </div>

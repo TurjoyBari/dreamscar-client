@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Magnetic from "@/components/animations/Magnetic";
 import TextReveal from "@/components/animations/TextReveal";
+import Link from "next/link";
 
 export default function Hero() {
   const containerRef = useRef(null);
@@ -61,7 +62,7 @@ export default function Hero() {
           >
             <Magnetic strength={0.4}>
               <button className="bg-primary-container text-on-primary-container px-8 py-4 rounded-xl font-bold flex items-center space-x-2 hover:shadow-[0_0_30px_rgba(255,152,0,0.5)] transition-all group overflow-hidden relative">
-                <span className="relative z-10">Rent a Car</span>
+                <Link href="/cars" ><span className="relative z-10">Rent a Car</span></Link>
                 <span className="material-symbols-outlined relative z-10 group-hover:translate-x-1 transition-transform">
                   arrow_forward
                 </span>
@@ -70,7 +71,7 @@ export default function Hero() {
             </Magnetic>
             <Magnetic strength={0.2}>
               <button className="border-2 border-outline px-8 py-4 rounded-xl font-bold hover:bg-surface-container-high transition-all hover:border-primary-container">
-                Add Your Car
+                <Link href= "/add-car">Add Your Car</Link>
               </button>
             </Magnetic>
           </motion.div>

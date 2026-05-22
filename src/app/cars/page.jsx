@@ -22,7 +22,7 @@ const ExploreCarsPage = async() => {
         {/* Breadcrumb & Title */}
         <FadeUp className="mb-10 text-center">
           <nav className="flex justify-center items-center gap-2 text-on-surface-variant font-label-md text-label-md mb-2">
-            <span>Home</span>
+            <Link href="/" ><span>Home</span></Link>
             <span className="material-symbols-outlined text-[14px]">chevron_right</span>
             <span>Listings</span>
             <span className="material-symbols-outlined text-[14px]">chevron_right</span>

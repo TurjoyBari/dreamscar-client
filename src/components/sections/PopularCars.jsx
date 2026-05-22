@@ -173,7 +173,7 @@ const PopularCars = () => {
         <FadeUp delay={0.4} className="mt-16 text-center">
           <Magnetic strength={0.2}>
             <button className="bg-primary-container text-on-primary-container px-10 py-4 rounded-xl font-bold hover:scale-95 transition-transform shadow-[0_0_20px_rgba(255,152,0,0.2)] hover:shadow-[0_0_30px_rgba(255,152,0,0.5)]">
-              View More Cars
+              <Link href="/cars">View More Cars</Link>
             </button>
           </Magnetic>
         </FadeUp>
