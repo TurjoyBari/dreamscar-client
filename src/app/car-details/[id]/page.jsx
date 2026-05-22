@@ -9,16 +9,38 @@ export const metadata = {
   title: "Chevrolet Camaro | DREAMS RENT",
 };
 
+// const fetchSingleCars = async (id, token) => {
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/cars/${id}`,
+//     {
+//         headers: {
+//             authorization: `Bearer ${token}` || ""
+//         }
+//     }
+//   );
+//   const data = await res.json();
+//   return data || {};
+// };
+
 const fetchSingleCars = async (id, token) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/cars/${id}`,
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/cars/${id}`,
     {
-        headers: {
-            authorization: `Bearer ${token}` || ""
-        }
+      headers: token
+        ? {
+            authorization: `Bearer ${token}`,
+          }
+        : {},
+      cache: "no-store"
     }
   );
-  const data = await res.json();
-  return data || {};
+
+  if (!res.ok) {
+    console.log(await res.text());
+    return null;
+  }
+
+  return res.json();
 };
 
 export default async function CarDetailsPage({params}) {
@@ -28,6 +50,8 @@ export default async function CarDetailsPage({params}) {
   const { token } = await auth.api.getToken({
         headers: await headers(),
     });
+
+    // console.log(token)
 
 
   const cars = await fetchSingleCars(id, token)
