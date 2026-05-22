@@ -4,8 +4,9 @@ import FadeUp from "@/components/animations/FadeUp";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import CancelBokingBtn from "@/components/sections/CancelBokingBtn";
+
 import { redirect } from "next/navigation";
+import CancelListingBtn from "@/components/sections/CancelListingBtn";
 
 export const metadata = {
   title: "User Listing | DREAMS RENT",
@@ -26,13 +27,24 @@ export default async function DashboardPage() {
         redirect("/login")
     }
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/booking/${session?.user?.id}`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-        cache: "no-store"
-    })
-    const booking = await res.json() || [];
+const res = await fetch(
+  `${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/cars/user/${session?.user?.id}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    cache: "no-store"
+  }
+)
+
+if (!res.ok) {
+  const errorText = await res.text()
+  console.log(errorText)
+
+  throw new Error("Failed to fetch cars")
+}
+
+const cars = await res.json()
  
 
 
@@ -188,8 +200,8 @@ export default async function DashboardPage() {
                     <th className="px-6 py-5 whitespace-nowrap">Cancel Listing <span className="material-symbols-outlined text-xs align-middle ml-1">unfold_more</span></th>
                   </tr>
                 </thead>
-                {booking?.map((booking) => (
-                <tbody key={booking?._id} className="divide-y divide-surface-container-highest">
+                {cars?.map((car) => (
+                <tbody key={car?._id} className="divide-y divide-surface-container-highest">
                   {/* Row 1 */}
                   <tr className="hover:bg-surface-container-high/20 transition-colors group">
                     
@@ -198,25 +210,25 @@ export default async function DashboardPage() {
                     <td className="px-6 py-6">
                       <div className="flex items-center gap-4">
                         <div className="w-16 h-10 rounded-lg overflow-hidden bg-surface-container-highest relative shrink-0">
-                          <img alt="Ferrari 458 MM Speciale" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={booking?.image} />
+                          <img alt="Ferrari 458 MM Speciale" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={car?.img} />
                         </div>
                         <div>
-                          <div className="font-bold text-on-surface group-hover:text-primary transition-colors">{booking?.brand}</div>
+                          <div className="font-bold text-on-surface group-hover:text-primary transition-colors">{car?.brand}</div>
                           <div className="text-xs text-on-surface-variant">Delivery</div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-6 text-on-surface-variant">Hourly</td>
                     <td className="px-6 py-6">
-                      <div className="text-sm">45, Avenue ,Mark Street, USA</div>
-                      <div className="text-xs text-primary">{new Date(booking?.bookingAt).toDateString()}</div>
+                      <div className="text-sm">{car?.location}, USA</div>
+                      <div className="text-xs text-primary">{new Date(car?.createdAt).toDateString()}</div>
                     </td>
                     <td className="px-6 py-6">
-                      <div className="text-sm">21, Avenue, Windham, USA</div>
-                      <div className="text-xs text-on-surface-variant">{new Date(booking?.bookingAt).toDateString()}</div>
+                      <div className="text-sm">{car?.location}, USA</div>
+                      <div className="text-xs text-on-surface-variant">{new Date(car?.createdAt).toDateString()}</div>
                     </td>
-                    <td className="px-6 py-6 text-sm text-on-surface-variant">{new Date(booking?.bookingAt).toDateString()}</td>
-                    <td className="px-6 py-6 text-sm text-on-surface-variant"><CancelBokingBtn bookingId={booking?._id} token={token} /></td>
+                    <td className="px-6 py-6 text-sm text-on-surface-variant">{new Date(car?.createdAt).toDateString()}</td>
+                    <td className="px-6 py-6 text-sm text-on-surface-variant"><CancelListingBtn listingId={car?._id} token={token} /></td>
                   </tr>
                   
                 </tbody>

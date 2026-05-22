@@ -7,7 +7,7 @@ import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Magnetic from "@/components/animations/Magnetic";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+
 
 export default function Navbar() {
   const { scrollY } = useScroll();

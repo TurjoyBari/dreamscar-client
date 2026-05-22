@@ -192,7 +192,7 @@ export default function AddCarPage() {
                       <label className="text-label-md">Car Type <span className="text-primary-container">*</span></label>
                       <button className="text-primary text-[12px] hover:underline">Add New</button>
                     </div>
-                    <Select className="w-full">
+                    <Select name="carType" className="w-full">
                       <Select.Trigger className="bg-surface-container-low border border-surface-container-highest py-3 rounded-lg flex items-center justify-between px-4 hover:bg-surface-container-high transition-colors text-label-md">
                         <Select.Value placeholder="Select Type" />
                       </Select.Trigger>
@@ -247,7 +247,7 @@ export default function AddCarPage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-label-md mb-2">Category <span className="text-primary-container">*</span></label>
-                    <Select className="w-full">
+                    <Select name="category" className="w-full">
                       <Select.Trigger className="bg-surface-container-low border border-surface-container-highest py-3 rounded-lg flex items-center justify-between px-4 hover:bg-surface-container-high transition-colors text-label-md">
                         <Select.Value placeholder="Select Category" />
                       </Select.Trigger>
@@ -261,7 +261,7 @@ export default function AddCarPage() {
                   </div>
                   <div>
                     <label className="block text-label-md mb-2">Plate Number</label>
-                    <input className="w-full bg-surface-container-low border border-surface-container-highest rounded-lg py-3 px-4 focus:ring-1 focus:ring-primary-container" placeholder="e.g. DX-9988-P" type="text"/>
+                    <input name="plateNumber" className="w-full bg-surface-container-low border border-surface-container-highest rounded-lg py-3 px-4 focus:ring-1 focus:ring-primary-container" placeholder="e.g. DX-9988-P" type="text"/>
                   </div>
                   <div>
                     <label className="block text-label-md mb-2">Price</label>
@@ -273,7 +273,7 @@ export default function AddCarPage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-label-md mb-2">Main Location <span className="text-primary-container">*</span></label>
-                    <Select className="w-full">
+                    <Select name="location" className="w-full">
                       <Select.Trigger className="bg-surface-container-low border border-surface-container-highest py-3 rounded-lg flex items-center justify-between px-4 hover:bg-surface-container-high transition-colors text-label-md">
                         <Select.Value placeholder="Select City" />
                       </Select.Trigger>
@@ -316,13 +316,13 @@ export default function AddCarPage() {
                   <div>
                     <label className="block text-label-md mb-2">Odometer</label>
                     <div className="flex">
-                      <input className="flex-1 bg-surface-container-low border border-surface-container-highest rounded-l-lg py-3 px-4 focus:ring-1 focus:ring-primary-container" placeholder="0" type="number"/>
+                      <input name="odometer" className="flex-1 bg-surface-container-low border border-surface-container-highest rounded-l-lg py-3 px-4 focus:ring-1 focus:ring-primary-container" placeholder="0" type="number"/>
                       <span className="inline-flex items-center px-4 rounded-r-lg border border-l-0 border-surface-container-highest bg-surface-container-high text-on-surface-variant">km</span>
                     </div>
                   </div>
                   <div>
                     <label className="block text-label-md mb-2">Color <span className="text-primary-container">*</span></label>
-                    <Select className="w-full" defaultSelectedKey="red">
+                    <Select name="color" className="w-full" defaultSelectedKey="red">
                       <Select.Trigger className="bg-surface-container-low border border-surface-container-highest py-3 rounded-lg flex items-center justify-between px-4 hover:bg-surface-container-high transition-colors text-label-md">
                         <Select.Value placeholder="Select Color" />
                       </Select.Trigger>
@@ -337,7 +337,7 @@ export default function AddCarPage() {
                   </div>
                   <div>
                     <label className="block text-label-md mb-2">Year of Car <span className="text-primary-container">*</span></label>
-                    <Select className="w-full" defaultSelectedKey="2023">
+                    <Select name="year" className="w-full" defaultSelectedKey="2023">
                       <Select.Trigger className="bg-surface-container-low border border-surface-container-highest py-3 rounded-lg flex items-center justify-between px-4 hover:bg-surface-container-high transition-colors text-label-md">
                         <Select.Value placeholder="Select Year" />
                       </Select.Trigger>
@@ -374,7 +374,7 @@ export default function AddCarPage() {
                   </div>
                   <div>
                     <label className="block text-label-md mb-2">Passengers</label>
-                    <input className="w-full bg-surface-container-low border border-surface-container-highest rounded-lg py-3 px-4 focus:ring-1 focus:ring-primary-container" placeholder="2" type="number"/>
+                    <input name="passengers" className="w-full bg-surface-container-low border border-surface-container-highest rounded-lg py-3 px-4 focus:ring-1 focus:ring-primary-container" placeholder="2" type="number"/>
                   </div>
                 </div>
 
@@ -410,7 +410,7 @@ export default function AddCarPage() {
                   </div>
                   <div>
                     <label className="block text-label-md mb-2">No. of Air Bags</label>
-                    <input className="w-full bg-surface-container-low border border-surface-container-highest rounded-lg py-3 px-4 focus:ring-1 focus:ring-primary-container" placeholder="6" type="number"/>
+                    <input name="airbags" className="w-full bg-surface-container-low border border-surface-container-highest rounded-lg py-3 px-4 focus:ring-1 focus:ring-primary-container" placeholder="6" type="number"/>
                   </div>
                 </div>
               </div>

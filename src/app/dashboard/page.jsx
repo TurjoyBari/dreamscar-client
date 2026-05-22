@@ -23,7 +23,7 @@ export default async function DashboardPage() {
     // console.log(session);
 
     if (!session?.user || !token) {
-        redirect("/login")
+        redirect("/signin")
     }
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/booking/${session?.user?.id}`, {
