@@ -9,39 +9,39 @@ export const metadata = {
   title: "Chevrolet Camaro | DREAMS RENT",
 };
 
-// const fetchSingleCars = async (id, token) => {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/cars/${id}`,
-//     {
-//         headers: {
-//             authorization: `Bearer ${token}` || ""
-//         }
-//     }
-//   );
-//   const data = await res.json();
-//   return data || {};
-// };
-
 const fetchSingleCars = async (id, token) => {
-
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/cars/${id}`,
+  const res = await fetch(`${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/cars/${id}`,
     {
-      headers: token
-        ? {
-            authorization: `Bearer ${token}`,
-          }
-        : {},
-      cache: "no-store"
+        headers: {
+            authorization: `Bearer ${token}` || ""
+        }
     }
   );
-
-  if (!res.ok) {
-    console.log(await res.text());
-    return null;
-  }
-
-  return res.json();
+  const data = await res.json();
+  return data || {};
 };
+
+// const fetchSingleCars = async (id, token) => {
+
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_EXPLORE_CAR_API_URL}/cars/${id}`,
+//     {
+//       headers: token
+//         ? {
+//             authorization: `Bearer ${token}`,
+//           }
+//         : {},
+//       cache: "no-store"
+//     }
+//   );
+
+//   if (!res.ok) {
+//     console.log(await res.text());
+//     return null;
+//   }
+
+//   return res.json();
+// };
 
 export default async function CarDetailsPage({params}) {
 
