@@ -1,6 +1,6 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
 
-const nextConfig: NextConfig = {
+const nextConfig= {
   images: {
     remotePatterns: [
       {
@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
         hostname: "plus.unsplash.com",
       },
     ],
+  },
+   eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 

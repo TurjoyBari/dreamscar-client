@@ -18,6 +18,6 @@ export async function proxy(request) {
 // export default function proxy(request: NextRequest) { ... }
 
 export const config = {
-  matcher: ['/cars', '/dashboard', '/car-details/:path*'],
+  matcher: ['/cars', '/dashboard', '/car-details/:path*' , '/add-car'],
 };
 // http://localhost:3000/about/all-path
